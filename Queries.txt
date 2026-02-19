@@ -1,0 +1,290 @@
+Question: 
+Find all the topics and tasks which are thought in the month of October
+
+Query 1:
+
+db.topics.find({
+  date: {
+    $gte: ISODate("2020-10-01"),
+    $lte: ISODate("2020-10-31")
+  }
+});
+
+Results:
+{
+  _id: ObjectId('6996d33be060956940624066'),
+  topic: 'HTML Basics',
+  date: 2020-10-05T00:00:00.000Z
+}
+{
+  _id: ObjectId('6996d33be060956940624067'),
+  topic: 'CSS Flexbox',
+  date: 2020-10-10T00:00:00.000Z
+}
+{
+  _id: ObjectId('6996d33be060956940624068'),
+  topic: 'JavaScript DOM',
+  date: 2020-10-15T00:00:00.000Z
+}
+{
+  _id: ObjectId('6996d33be060956940624069'),
+  topic: 'MongoDB Intro',
+  date: 2020-10-20T00:00:00.000Z
+}
+
+Query 2:
+
+db.tasks.find({
+  date: {
+    $gte: ISODate("2020-10-01"),
+    $lte: ISODate("2020-10-31")
+  }
+})
+
+Result:
+
+{
+  _id: ObjectId('6996d364e06095694062406b'),
+  task: 'HTML Task',
+  topic: 'HTML Basics',
+  date: 2020-10-05T00:00:00.000Z,
+  submitted_users: [
+    'U001',
+    'U002'
+  ]
+}
+{
+  _id: ObjectId('6996d364e06095694062406c'),
+  task: 'Flexbox Layout',
+  topic: 'CSS Flexbox',
+  date: 2020-10-10T00:00:00.000Z,
+  submitted_users: [
+    'U001'
+  ]
+}
+{
+  _id: ObjectId('6996d364e06095694062406d'),
+  task: 'DOM Manipulation',
+  topic: 'JavaScript DOM',
+  date: 2020-10-15T00:00:00.000Z,
+  submitted_users: [
+    'U002',
+    'U003'
+  ]
+}
+{
+  _id: ObjectId('6996d364e06095694062406e'),
+  task: 'Aggregation Pipeline',
+  topic: 'MongoDB Aggregation',
+  date: 2020-10-20T00:00:00.000Z,
+  submitted_users: [
+    'U001',
+    'U004'
+  ]
+}
+
+---------------------------------------------------------------------------------------------
+
+Question: 
+Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020
+
+Query:
+
+db.company_drives.find({
+  drive_date: {
+    $gte: ISODate("2020-10-15"),
+    $lte: ISODate("2020-10-31")
+  }
+})
+
+Result:
+
+{
+  _id: ObjectId('6996d3d5e06095694062406f'),
+  company: 'Zoho',
+  drive_date: 2020-10-18T00:00:00.000Z,
+  students_appeared: [
+    'U001',
+    'U002'
+  ]
+}
+{
+  _id: ObjectId('6996d3d5e060956940624070'),
+  company: 'TCS',
+  drive_date: 2020-10-25T00:00:00.000Z,
+  students_appeared: [
+    'U003',
+    'U004',
+    'U005'
+  ]
+}
+
+---------------------------------------------------------------------------------------------
+
+Question: 
+Find all the company drives and students who are appeared for the placement.
+
+Query:
+
+db.company_drives.find({}, {
+  company: 1,
+  drive_date: 1,
+  students_appeared: 1,
+  _id: 0
+});
+
+Result:
+
+{
+  company: 'Zoho',
+  drive_date: 2020-10-18T00:00:00.000Z,
+  students_appeared: [
+    'U001',
+    'U002'
+  ]
+}
+{
+  company: 'TCS',
+  drive_date: 2020-10-25T00:00:00.000Z,
+  students_appeared: [
+    'U003',
+    'U004',
+    'U005'
+  ]
+}
+{
+  company: 'TCS',
+  drive_date: 2020-10-25T00:00:00.000Z,
+  students_appeared: [
+    'U003',
+    'U004',
+    'U005'
+  ]
+}
+
+---------------------------------------------------------------------------------------------
+
+Question: 
+Find the number of problems solved by the user in codekata
+
+Query:
+
+db.codekata.aggregate([
+  {
+    $group: {
+      _id: "$user_id",
+      total_problems_solved: { $sum: "$problems_solved" }
+    }
+  }
+])
+
+Results:
+{
+  _id: 'U003',
+  total_problems_solved: 25
+}
+{
+  _id: 'U001',
+  total_problems_solved: 70
+}
+{
+  _id: 'U002',
+  total_problems_solved: 40
+}
+{
+  _id: 'U002',
+  total_problems_solved: 40
+}
+
+---------------------------------------------------------------------------------------------
+
+
+Question: 
+Find all the mentors with who has the mentee's count more than 15
+
+Query:
+
+db.mentors.aggregate([
+  {
+    $project: {
+      name: 1,
+      mentee_count: { $size: "$mentees" }
+    }
+  },
+  {
+    $match: { mentee_count: { $gt: 15 } }
+  }
+])
+
+---------------------------------------------------------------------------------------------
+
+Question: 
+
+Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 
+31-oct-2020
+
+Query 1:
+
+db.attendance.find({
+  status: "absent",
+  date: {
+    $gte: ISODate("2020-10-15"),
+    $lte: ISODate("2020-10-31")
+  }
+})
+
+Result:
+
+{
+  _id: ObjectId('6996d2dbe060956940624062'),
+  user_id: 'U002',
+  date: 2020-10-16T00:00:00.000Z,
+  status: 'absent'
+}
+{
+  _id: ObjectId('6996d2dbe060956940624063'),
+  user_id: 'U003',
+  date: 2020-10-20T00:00:00.000Z,
+  status: 'absent'
+}
+{
+  _id: ObjectId('6996d2dbe060956940624063'),
+  user_id: 'U003',
+  date: 2020-10-20T00:00:00.000Z,
+  status: 'absent'
+}
+
+Query 2: Not submitted
+
+db.tasks.find({
+  date: {
+    $gte: ISODate("2020-10-15"),
+    $lte: ISODate("2020-10-31")
+  }
+})
+
+Result:
+
+{
+  _id: ObjectId('6996d364e06095694062406d'),
+  task: 'DOM Manipulation',
+  topic: 'JavaScript DOM',
+  date: 2020-10-15T00:00:00.000Z,
+  submitted_users: [
+    'U002',
+    'U003'
+  ]
+}
+
+{
+  _id: ObjectId('6996d364e06095694062406d'),
+  task: 'DOM Manipulation',
+  topic: 'JavaScript DOM',
+  date: 2020-10-15T00:00:00.000Z,
+  submitted_users: [
+    'U002',
+    'U003'
+  ]
+}
+
+---------------------------------------------------------------------------------------------
