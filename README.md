@@ -193,60 +193,10 @@ db.company_drives.insertMany([
 ## 🔍 Queries
 
 ### 1. Topics and Tasks in October
-
-```js
-db.topics.find({
-  date: { $gte: ISODate("2020-10-01"), $lte: ISODate("2020-10-31") }
-})
-
-db.tasks.find({
-  date: { $gte: ISODate("2020-10-01"), $lte: ISODate("2020-10-31") }
-})
-```
-
 ### 2. Company Drives between 15-Oct-2020 and 31-Oct-2020
-
-```js
-db.company_drives.find({
-  drive_date: { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") }
-})
-```
-
 ### 3. Company Drives and Students Appeared
-
-```js
-db.company_drives.find({}, { company: 1, drive_date: 1, students_appeared: 1, _id: 0 })
-```
-
-### 4. Number of Problems Solved by Each User
-
-```js
-db.codekata.aggregate([
-  { $group: { _id: "$user_id", total_problems_solved: { $sum: "$problems_solved" } } }
-])
-```
-
 ### 5. Mentors with Mentee Count > 15
-
-```js
-db.mentors.aggregate([
-  { $project: { name: 1, mentee_count: { $size: "$mentees" } } },
-  { $match: { mentee_count: { $gt: 15 } } }
-])
-```
-
 ### 6. Users Absent and Task Not Submitted (15-Oct to 31-Oct)
-
-```js
-db.attendance.find({
-  status: "absent",
-  date: { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") }
-})
-```
-
-(Compare these users manually with `submitted_users` in tasks.)
-
----
 
 ## 🚀 How to Run
 
