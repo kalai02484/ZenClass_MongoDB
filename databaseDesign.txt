@@ -23,11 +23,11 @@ db.users.insertMany([
 {
   acknowledged: true,
   insertedIds: {
-    '0': ObjectId('6996d16ce060956940624055'),
-    '1': ObjectId('6996d16ce060956940624056'),
-    '2': ObjectId('6996d16ce060956940624057'),
-    '3': ObjectId('6996d16ce060956940624058'),
-    '4': ObjectId('6996d16ce060956940624059')
+    '0': ObjectId('69aaf9145cb7ac3b11040dd1'),
+    '1': ObjectId('69aaf9145cb7ac3b11040dd2'),
+    '2': ObjectId('69aaf9145cb7ac3b11040dd3'),
+    '3': ObjectId('69aaf9145cb7ac3b11040dd4'),
+    '4': ObjectId('69aaf9145cb7ac3b11040dd5')
   }
 }
 
@@ -46,7 +46,7 @@ db.mentors.insertMany([
     name: "Priya",
     mentees: ["U003","U004"]
   }
-])
+]);
 
 //Result
 
@@ -75,11 +75,11 @@ db.codekata.insertMany([
 {
   acknowledged: true,
   insertedIds: {
-    '0': ObjectId('6996d2b1e06095694062405c'),
-    '1': ObjectId('6996d2b1e06095694062405d'),
-    '2': ObjectId('6996d2b1e06095694062405e'),
-    '3': ObjectId('6996d2b1e06095694062405f'),
-    '4': ObjectId('6996d2b1e060956940624060')
+    '0': ObjectId('69aaf95f5cb7ac3b11040dd8'),
+    '1': ObjectId('69aaf95f5cb7ac3b11040dd9'),
+    '2': ObjectId('69aaf95f5cb7ac3b11040dda'),
+    '3': ObjectId('69aaf95f5cb7ac3b11040ddb'),
+    '4': ObjectId('69aaf95f5cb7ac3b11040ddc')
   }
 }
 
@@ -97,16 +97,13 @@ db.attendance.insertMany([
 
 //Result
 
-{
-  acknowledged: true,
-  insertedIds: {
-    '0': ObjectId('6996d2dbe060956940624061'),
-    '1': ObjectId('6996d2dbe060956940624062'),
-    '2': ObjectId('6996d2dbe060956940624063'),
-    '3': ObjectId('6996d2dbe060956940624064'),
-    '4': ObjectId('6996d2dbe060956940624065')
-  }
-}
+db.attendance.insertMany([
+  { user_id: "U001", date: ISODate("2020-10-16"), status: "present" },
+  { user_id: "U002", date: ISODate("2020-10-16"), status: "absent" },
+  { user_id: "U003", date: ISODate("2020-10-20"), status: "absent" },
+  { user_id: "U004", date: ISODate("2020-10-21"), status: "present" },
+  { user_id: "U005", date: ISODate("2020-10-22"), status: "absent" }
+]);
 
 ---------------------------------------------------------------------------------------------
 
@@ -126,11 +123,11 @@ db.topics.insertMany([
 {
   acknowledged: true,
   insertedIds: {
-    '0': ObjectId('6996d33be060956940624066'),
-    '1': ObjectId('6996d33be060956940624067'),
-    '2': ObjectId('6996d33be060956940624068'),
-    '3': ObjectId('6996d33be060956940624069'),
-    '4': ObjectId('6996d33be06095694062406a')
+    '0': ObjectId('69aaf9ab5cb7ac3b11040de2'),
+    '1': ObjectId('69aaf9ab5cb7ac3b11040de3'),
+    '2': ObjectId('69aaf9ab5cb7ac3b11040de4'),
+    '3': ObjectId('69aaf9ab5cb7ac3b11040de5'),
+    '4': ObjectId('69aaf9ab5cb7ac3b11040de6')
   }
 }
 
@@ -170,10 +167,10 @@ db.tasks.insertMany([
 {
   acknowledged: true,
   insertedIds: {
-    '0': ObjectId('6996d364e06095694062406b'),
-    '1': ObjectId('6996d364e06095694062406c'),
-    '2': ObjectId('6996d364e06095694062406d'),
-    '3': ObjectId('6996d364e06095694062406e')
+    '0': ObjectId('69aaf9f85cb7ac3b11040de7'),
+    '1': ObjectId('69aaf9f85cb7ac3b11040de8'),
+    '2': ObjectId('69aaf9f85cb7ac3b11040de9'),
+    '3': ObjectId('69aaf9f85cb7ac3b11040dea')
   }
 }
 
@@ -205,12 +202,11 @@ db.company_drives.insertMany([
 {
   acknowledged: true,
   insertedIds: {
-    '0': ObjectId('6996d3d5e06095694062406f'),
-    '1': ObjectId('6996d3d5e060956940624070'),
-    '2': ObjectId('6996d3d5e060956940624071')
+    '0': ObjectId('69aafa215cb7ac3b11040deb'),
+    '1': ObjectId('69aafa215cb7ac3b11040dec'),
+    '2': ObjectId('69aafa215cb7ac3b11040ded')
   }
 }
-
 
 
 
